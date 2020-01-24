@@ -1,0 +1,16 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-t",
+        "gcr.io/gymba-265819/gymba-chatbot",
+        "-f",
+        "Dockerfile",
+        ".",
+      ]
+#   - name: "gcr.io/cloud-builders/docker"
+#     args: ["push", "gcr.io/gymba-265819/gymba-chatbot"]
+images:
+  - "gcr.io/gymba-265819/gymba-chatbot"
+timeout: 3600s

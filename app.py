@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request
 from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer
@@ -25,8 +24,7 @@ def get_bot_response():
             return str("No message argument provided")
         return str(pan_japa.get_response(userText))
     except Exception:
-        return str("Somthing went wrong")
-
+        return str("Something went wrong")
 
 if __name__ == "__main__":
-    app.run("localhost",6000)
+    app.run()
