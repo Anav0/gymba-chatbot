@@ -1,5 +1,5 @@
+dnspython>=1.16.0
 Flask>=1.1.1
 python-dotenv>=0.10.5
 chatterbot>=1.0.5
 SQLAlchemy==1.2
-dnspython>=1.16.0
