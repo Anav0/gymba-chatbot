@@ -1,16 +1,22 @@
 steps:
+  # Build the container image
   - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA", "."]
+  # Push the image to Container Registry
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA"]
+  # Deploy image to Cloud Run
+  - name: "gcr.io/cloud-builders/gcloud"
     args:
-      [
-        "build",
-        "-t",
-        "gcr.io/gymba-265819/gymba-chatbot",
-        "-f",
-        "Dockerfile",
-        ".",
-      ]
-#   - name: "gcr.io/cloud-builders/docker"
-#     args: ["push", "gcr.io/gymba-265819/gymba-chatbot"]
+      - "run"
+      - "deploy"
+      - "$REPO_NAME"
+      - "--image"
+      - "gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA"
+      - "--region"
+      - "europe-west1"
+      - "--platform"
+      - "managed"
 images:
-  - "gcr.io/gymba-265819/gymba-chatbot"
+  - gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA
 timeout: 3600s
